@@ -13,3 +13,7 @@
     - add the user to this role
 
 Details see: https://blog.atwork.at/post/Invite-external-users-to-your-Azure-subscription
+
+## Architecture
+
+https://docs.microsoft.com/en-us/azure/architecture/patterns/
