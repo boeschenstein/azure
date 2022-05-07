@@ -14,7 +14,7 @@
 
 - Create free Azure Subscription, Login to Azure Portal
 - Create new Angular Website in new Github repository 'my-first-static-web-app' (<https://github.com/staticwebdev/angular-basic/generate>)
-- open CLI, enter `az login`
+- open Azure CLI (Bash can be started in Azure Portal), enter `az login` (not needed in Azure Portal Bash)
 - create new Ressource Group
   - `az group create --name my-swa-group --location "westEurope"`
 - Create Environment variable:
@@ -35,7 +35,7 @@ az staticwebapp create \
 
 - Get Repository URL: `az staticwebapp show --name  my-first-static-web-app --query "repositoryUrl"`
 - Get Website URL: `az staticwebapp show --name my-first-static-web-app --query "defaultHostname"`
-
+- Anytime the angular app is changed, an Github action is running (check 'Actions')
 - Cleanup `az group delete --name my-swa-group`
 
 <https://docs.microsoft.com/en-us/azure/static-web-apps/get-started-cli?tabs=angular>
