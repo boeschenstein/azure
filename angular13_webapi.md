@@ -1,4 +1,4 @@
-# New Frontend/Backend Project with Angular 13
+# Azure: New Frontend/Backend Project with Angular 13 + SQL Server/Database
 
 (no DevOps: source locally handled)
 
@@ -13,7 +13,7 @@ Ideas from <https://www.c-sharpcorner.com/article/easily-create-spa-with-net-6-0
 
 ### Azure Portal: create Web App
 
-- in `pp Service`: Create `Web App`
+- in `App Service`: Create `Web App`
 - select subscription, select or create Resource Group
 - enter name: `angular13webapi`
 - Runtime stack: `.NET 6 (LTS)`
@@ -99,7 +99,7 @@ public IEnumerable<WeatherForecast> Get()
 }
 ```
 
-- Create the database `MyAngular13TestDB` and add a table:
+- Create the database `MyAngular13TestDB` in `(localdb)\\MSSQLLocalDB` and add a table:
 
 ```sql
 CREATE TABLE [dbo].[WeatherForecasts](
@@ -113,3 +113,51 @@ GO
 
 - Add some records into the table `MyAngular13TestDB.dbo.WeatherForecasts`
 - Run the app and see the created records in web page (header item `Fetch Data`)
+
+## Use SQL Server/Database in Azure
+
+### Create SQL Database in Azure
+
+- Create new SQL Database `myazangular13testdb`, Create new SQL Server `myazangular13testsqlserver`
+- Choose cheapest (for testing purposes: Basic: 100 MB storage)
+- [x] Enable Public Endpoint
+- [x] Allow Azure services and resources to access this server
+
+### Add Test table and Test data to Database
+
+- Connect (you can use your SSMS) to the database `myazangular13testdb` and add a table: same as above
+- Add some records
+
+### Config SQL Server/Database
+
+Add Connection String to `appSettings.json`. Get it form Azure Portal (Settings: Connection Strings), Enter your admin password:
+
+```json
+{
+  "Logging": { ... }
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "ConnStr": "Server=tcp:myazangular13testsqlserver.database.windows.net,1433;Initial Catalog=myazangular13testdb;Persist Security Info=False;User ID=bop;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+  }
+}
+```
+
+### Test your app
+
+The app should run locally as well: disable connectionstring in `appsettings.Development.json` and run it locally, using your Azure Sql Server/Database.
+
+## Deploy and Run
+
+- Deploy your app
+- Test your app
+
+## Cleanup
+
+Remove all items in Azure do avoid costs.
+
+## Todo/next steps
+
+- Add Migrations
+- Security in Real-World scenario
+- DevOps: Azure, Github
+- Add Security (Backend, Frontend)
